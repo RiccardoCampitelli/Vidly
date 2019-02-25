@@ -1,0 +1,13 @@
+﻿@model Vidly.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>@Model.Name</h1>
+@if (Model.BirthDate.HasValue)
+{ 
+ <h2>@Model.BirthDate.Value.ToShortDateString()</h2>
+}
+
+
