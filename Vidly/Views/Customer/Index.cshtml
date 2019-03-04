@@ -3,8 +3,7 @@
 @{
     ViewBag.Title = "Customers";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+
 
 <h1>Customers</h1>
 <table class="table table-bordered table-hover">
@@ -18,7 +17,7 @@
         @foreach (var customer in Model)
         {
         <tr>
-            <td>@Html.ActionLink(customer.Name.ToString(), "Details", "Customer", new { id = customer.Id }, null)</td>
+            <td>@Html.ActionLink(customer.Name, "Edit", "Customer", new { id = customer.Id }, null)</td>
             <td>@customer.MembershipType.Name</td>
         </tr>
         }
