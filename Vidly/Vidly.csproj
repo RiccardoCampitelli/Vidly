@@ -229,6 +229,7 @@
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Dtos\CustomerDto.cs" />
+    <Compile Include="Dtos\GenreDto.cs" />
     <Compile Include="Dtos\MembershipTypeDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Global.asax.cs">
