@@ -9,13 +9,13 @@ using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
-    public class MoviesController : Controller
+    public class MovieController : Controller
     {
 
         private ApplicationDbContext _context;
        
 
-        public MoviesController()
+        public MovieController()
         {
             _context = new ApplicationDbContext();
            
@@ -85,11 +85,9 @@ namespace Vidly.Controllers
             {
                 var viewModel = new MovieFormViewModel(movie)
                 {
-                   
                     GenreList = _context.Genres.ToList()
                 };
-
-
+                
                 return View("MovieForm", viewModel);
             }
 
@@ -104,7 +102,6 @@ namespace Vidly.Controllers
                 var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
 
                 movieInDb.Name = movie.Name;
-                movieInDb.DateAdded = movie.DateAdded;
                 movieInDb.GenreId = movie.GenreId;
                 movieInDb.NumberInStock = movie.NumberInStock;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
@@ -113,7 +110,7 @@ namespace Vidly.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("Display", "Movies");
+            return RedirectToAction("Display", "Movie");
         }
 
         public ActionResult Edit(int id)
