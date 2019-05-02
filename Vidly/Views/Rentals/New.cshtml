@@ -99,7 +99,7 @@
                 return vm.movieIds.length>0 ;
             }, "Please select at least one movie");
 
-            $("#newRental").validate({
+           var validator = $("#newRental").validate({
                 submitHandler: function () {
 
                     console.log("submitting")
@@ -110,6 +110,18 @@
                     })
                         .done(function () {
                             toastr.success("Successfully Recorded");
+
+                            $("#customer").typeahead("val", "");
+                            $("#movie").typeahead("val", "");
+                            $("#movies").empty();
+
+                            vm = {
+                                movieIds: []
+                            };
+
+                            validator.resetForm();
+
+
                         })
                         .fail(function (e) {
                             toastr.error("Something went wrong");
