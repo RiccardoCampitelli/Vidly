@@ -16,6 +16,11 @@
     white-space: normal;
 }
 
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
