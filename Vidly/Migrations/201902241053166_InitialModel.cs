@@ -7,14 +7,7 @@ namespace Vidly.Migrations
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.Customers",
-                c => new
-                {
-                    Id = c.Int(nullable: false, identity: true),
-                    Name = c.String(),
-                })
-                .PrimaryKey(t => t.Id);
+           
 
             CreateTable(
                 "dbo.AspNetRoles",
@@ -103,7 +96,6 @@ namespace Vidly.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Customers");
         }
     }
 }
