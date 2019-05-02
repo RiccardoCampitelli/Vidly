@@ -21,6 +21,11 @@
     align-items: center;
 }
 
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
