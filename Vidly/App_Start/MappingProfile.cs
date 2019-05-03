@@ -23,6 +23,9 @@ namespace Vidly.App_Start
             Mapper.CreateMap<Rental, RentalDto>();
             Mapper.CreateMap<RentalDto, Rental>();
 
+            Mapper.CreateMap<Rental, RentalsDisplayDto>();
+            Mapper.CreateMap<RentalsDisplayDto, Rental>();
+
         }
     }
 }

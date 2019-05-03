@@ -6,8 +6,73 @@
 
 <h1>@Model.Name</h1>
 @if (Model.BirthDate.HasValue)
-{ 
- <h2>@Model.BirthDate.Value.ToShortDateString()</h2>
+{
+    <p>@Model.BirthDate.Value.ToShortDateString()</p>
 }
+<p>@Model.MembershipType.Name membership</p>
 
+@if (Model.IsSubscribedToNewsLetter)
+{
+    <p>Is subscribed to newsletter</p>
+}
+else {
+    <p>Is not subscribed to newsletter</p>
+    }
+
+<hr />
+
+    <table id="rentals" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Movie</th>
+            <th>Rented</th>
+            <th>Returned</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            var table = $("#rentals").DataTable({
+                ajax: {
+                    url: "/api/rental/"+@Model.Id,
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "movieName"
+                       
+                    },
+                    {
+                        data: "dateRented",
+                        render: function (data) {
+                            let date = new Date(data);
+                            return date.toDateString();
+                        }
+                    },
+                    {
+                        data: "dateReturned",
+                        render: function (data) {
+                            if (data == null) {
+                                return "<button class='btn btn-primary'>Return</button>";
+                            }
+                            else {
+                                let date = new Date(data);
+                                return date.toDateString();
+                            }
+                        }
+                       
+                    }
+                ]
+
+            });
+
+        });
+
+    </script>
+
+}
 

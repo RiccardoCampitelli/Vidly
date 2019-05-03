@@ -235,6 +235,7 @@
     <Compile Include="Dtos\MembershipTypeDto.cs" />
     <Compile Include="Dtos\MovieDto.cs" />
     <Compile Include="Dtos\RentalDto.cs" />
+    <Compile Include="Dtos\RentalsDisplayDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

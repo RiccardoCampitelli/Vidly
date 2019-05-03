@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -49,6 +51,25 @@ namespace Vidly.Controllers.Api
             _context.SaveChanges();
 
             return Ok();
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetRentals()
+        {
+            var rentals = _context.Rentals.Include(m=>m.Movie).ToList();
+            return Ok(rentals);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetCustomerRentals(int id)
+        {
+            var rentals = _context.Rentals.Include(r => r.Movie).Include(r => r.Customer).Where(r => r.Customer.Id == id);
+            var rentalsDto = new List<RentalsDisplayDto>();
+            foreach (var rental in rentals)
+            {
+                rentalsDto.Add(Mapper.Map<Rental, RentalsDisplayDto>(rental));
+            }
+            return Ok(rentalsDto);
         }
     }
 }
