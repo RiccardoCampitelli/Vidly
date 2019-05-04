@@ -36,6 +36,39 @@ else {
     {
     <script>
         $(document).ready(function () {
+            
+            renderTable();
+
+            $("#rentals").on("click", ".js-delete", function () {
+                var button = $(this);
+                console.log(button.attr("data-movie-id"));
+                bootbox.confirm("Are you sure you want to return this movie?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/rental/" + button.attr("data-movie-id"),
+                            method: "post",
+                            success: function () {
+                                console.log("done.");
+                            }
+                        })
+                            .done(function () {
+                                toastr.success("Returned successfully");
+                                $("#rentals").DataTable().destroy();
+                                renderTable();
+                            })
+                            .fail(function (e) {
+                                console.log(e);
+                                toastr.error("Something went wrong");
+                            });
+                    }
+                });
+
+
+            });
+
+        });
+
+        function renderTable(){
             var table = $("#rentals").DataTable({
                 ajax: {
                     url: "/api/rental/"+@Model.Id,
@@ -54,13 +87,16 @@ else {
                         }
                     },
                     {
-                        data: "dateReturned",
+                        data: {
+                            "dateReturned": "dateReturned",
+                            "id": "id"
+                        },
                         render: function (data) {
-                            if (data == null) {
-                                return "<button class='btn btn-primary'>Return</button>";
+                            if (data.dateReturned == null) {
+                                return "<button class='btn btn-primary js-delete' data-movie-id='"+data.id+"'>Return</button>";
                             }
                             else {
-                                let date = new Date(data);
+                                let date = new Date(data.dateReturned);
                                 return date.toDateString();
                             }
                         }
@@ -69,8 +105,8 @@ else {
                 ]
 
             });
-
-        });
+            return;
+        }
 
     </script>
 

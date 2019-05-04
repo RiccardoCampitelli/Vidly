@@ -71,5 +71,20 @@ namespace Vidly.Controllers.Api
             }
             return Ok(rentalsDto);
         }
+
+        [HttpPost]
+        public IHttpActionResult ReturnRental(int id)
+        {
+            var rental = _context.Rentals.Include(m=>m.Movie).Single(r => r.Id == id);
+
+            rental.DateReturned = DateTime.Now;
+
+            var movie = _context.Movies.Single(m => m.Id == rental.Movie.Id);
+            movie.NumberAvailable++;
+
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

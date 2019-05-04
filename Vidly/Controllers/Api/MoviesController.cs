@@ -59,6 +59,7 @@ namespace Vidly.Controllers.Api
                 return BadRequest();
 
             var movie = Mapper.Map<MovieDto, Movie>(movieDto);
+            movie.NumberAvailable = movieDto.NumberInStock;
 
             _context.Movies.Add(movie);
             _context.SaveChanges();
@@ -96,6 +97,8 @@ namespace Vidly.Controllers.Api
 
             if (movieInDb == null)
                 return NotFound();
+
+            //delete rentals too
 
             _context.Movies.Remove(movieInDb);
             _context.SaveChanges();

@@ -63,7 +63,13 @@
                                 console.log("success");
                                 table.row(button.parents("tr")).remove().draw();
                             }
-                        });
+                        })
+                            .done(function () {
+                                toastr.success("Deleted.");
+                            })
+                            .fail(function () {
+                                toastr.error("Error.");
+                            });
                     }
                 });
 
