@@ -18,6 +18,13 @@ namespace Vidly.Models
         }
     }
 
+    public class AppRole : IdentityRole
+    {
+        public AppRole() : base() { }
+        public AppRole(string name) : base(name) { }
+        // extra properties here 
+    }
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Customer> Customers { get; set; }
