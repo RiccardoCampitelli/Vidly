@@ -353,6 +353,10 @@
     <Compile Include="Migrations\201905041923363_AddAuth.Designer.cs">
       <DependentUpon>201905041923363_AddAuth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905061456352_SeedUsers.cs" />
+    <Compile Include="Migrations\201905061456352_SeedUsers.Designer.cs">
+      <DependentUpon>201905061456352_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -363,6 +367,7 @@
     <Compile Include="Models\Min18YearsIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Rental.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CustomerViewModel.cs" />
@@ -630,6 +635,7 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Movie\ReadOnlyDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -713,6 +719,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905041923363_AddAuth.resx">
       <DependentUpon>201905041923363_AddAuth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905061456352_SeedUsers.resx">
+      <DependentUpon>201905061456352_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

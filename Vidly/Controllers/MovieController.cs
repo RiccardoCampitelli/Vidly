@@ -20,36 +20,18 @@ namespace Vidly.Controllers
             _context = new ApplicationDbContext();
            
         }
-        // GET: Movies
-        public ActionResult Random()
-        {
-            var movie = new Movie() { Name = "Shrek" };
-
-            var viewResult = new ViewResult();
-            var customers = new List<Models.Customer> {
-                new Models.Customer { Name = "Customer 1"},
-                new Models.Customer { Name= "Customer 2"}
-            };
-
-            var viewModel = new RandomMovieViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
-
-
-            return View(viewModel);
-        }
+       
         
         
 
         [Route("movies/")]
         public ActionResult Display()
         {
-            
-            var movies = _context.Movies.Include( m => m.GenreName).ToList();
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View();
 
-            return View(movies);
+
+            return View("ReadOnlyDisplay");
 
         }
 
@@ -64,6 +46,7 @@ namespace Vidly.Controllers
             return View(movies);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         [Route("Movies/New")]
         public ActionResult New()
         {
@@ -77,6 +60,7 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         [ValidateAntiForgeryToken]
         [Route("Movies/Save")]
         public ActionResult Save(Movie movie)
@@ -114,6 +98,7 @@ namespace Vidly.Controllers
             return RedirectToAction("Display", "Movie");
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
