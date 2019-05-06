@@ -42,6 +42,10 @@
                 movieIds: []
             };
 
+            toastr.options = {
+                "positionClass": "toast-bottom-right"
+            };
+
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,

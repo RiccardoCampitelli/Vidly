@@ -27,6 +27,10 @@
 
         $(document).ready(function () {
 
+            toastr.options = {
+                "positionClass": "toast-bottom-right"
+            };
+
             var table = $("#movies").DataTable({
                 ajax: {
                     url: "/api/movies/",
@@ -60,7 +64,6 @@
                             url: "/api/movies/" + button.attr("data-movie-id"),
                             method: "DELETE",
                             success: function () {
-                                console.log("success");
                                 table.row(button.parents("tr")).remove().draw();
                             }
                         })

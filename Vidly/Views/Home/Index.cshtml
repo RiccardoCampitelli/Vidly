@@ -4,47 +4,84 @@
 
 
 
-<div class="jumbotron">
     <div class="container">
+      
+
+    </div>
+
+    <div class="container">
+
+
+
+
         <div class="row ">
 
             <div class="col-xs-4 col-centered">
-                <h1>Welcome</h1>
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        <h5 class="panel-title center">Welcome</h5>
+                    </div>
+
+                    <div class="panel-body">
+                        <p class="panel">
+                            This is a Video Rental App written in C# using the ASP.NET Framework.
+                        </p>
+                        <p class="panel">
+                            Guest: guest@@vidly.com
+                            pw: Rmit1234!
+                        </p>
+                        <p class="panel">
+                            Admin: admin@@vidly.com
+                            pw: Rmit1234!
+
+                        </p>
+                        <p class="panel">
+                            Source code is available here <a href="https://github.com/rcdCamp/Vidly">https://github.com/rcdCamp/Vidly</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4 col-centered" id="seed">
+                <div class="row">
+                    <div class="col-xs-4 col-centered">
+                <button class='btn btn-primary js-seed'>Seed Database</button>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
-</div>
-<div class="container">
-    <div class="row ">
 
-        <div class="col-xs-4 col-centered">
-            <div class="panel panel-default">
+@section scripts
+{
+<script>
+    $(document).ready(function () {
+        toastr.options = {
+            "positionClass": "toast-bottom-right"
+        };
 
-                <div class="panel-heading">
-                    <h5 class="panel-title center">Welcome</h5>
-                </div>
-
-                <div class="panel-body">
-                    <p class="panel">
-                        This is a Video Rental App written in C# using the ASP.NET Framework.
-                    </p>
-                    <p class="panel">
-                        Guest: guest@@vidly.com
-                              pw: Rmit1234!
-                    </p>
-                    <p class="panel">
-                        Admin: admin@@vidly.com
-                              pw: Rmit1234!
-
-                    </p>
-                    <p class="panel">
-                        Source code is available here <a href="https://github.com/rcdCamp/Vidly">https://github.com/rcdCamp/Vidly</a>
-                    </p>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-</div>
+        $("#seed").on("click", ".js-seed", function () {
+            console.log("Calling ajax");
+            bootbox.confirm("This will reset all Customer, Movie and Rental records. Are you sure?", function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "/api/seed",
+                        method: "PUT"
+                    })
+                        .done(function () {
+                            toastr.success("Database Seeded.");
+                        })
+                        .fail(function () {
+                            toastr.error("Something went wrong.");
+                        });
+                }
+            });
+        });
+    });
+</script>
+    }

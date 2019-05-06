@@ -36,6 +36,10 @@ else {
     {
     <script>
         $(document).ready(function () {
+
+            toastr.options = {
+                "positionClass": "toast-bottom-right"
+            };
             
             renderTable();
 
@@ -56,8 +60,7 @@ else {
                                 $("#rentals").DataTable().destroy();
                                 renderTable();
                             })
-                            .fail(function (e) {
-                                console.log(e);
+                            .fail(function () {
                                 toastr.error("Something went wrong");
                             });
                     }
