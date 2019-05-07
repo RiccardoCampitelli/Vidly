@@ -84,6 +84,13 @@ namespace Vidly.Controllers.Api
             if (movieInDb == null)
                 return NotFound();
 
+            var minNumberInStock = movieInDb.NumberInStock - movieInDb.NumberAvailable;
+
+            if (movieDto.NumberInStock < minNumberInStock)
+                return BadRequest("Must be at least" + minNumberInStock + "copies available");
+
+
+
             Mapper.Map(movieDto, movieInDb);
 
             _context.SaveChanges();
@@ -101,7 +108,9 @@ namespace Vidly.Controllers.Api
             if (movieInDb == null)
                 return NotFound();
 
-            //delete rentals too
+            
+
+          
 
             _context.Movies.Remove(movieInDb);
             _context.SaveChanges();

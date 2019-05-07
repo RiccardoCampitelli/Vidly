@@ -1,42 +1,15 @@
-﻿@model Vidly.Models.Customer
-
+﻿
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@Model.Name</h1>
-<ul>
-@if (Model.BirthDate.HasValue)
-{
-    <li>@Model.BirthDate.Value.ToShortDateString()</li>
-}
-
-<li>@Model.MembershipType.Name membership</li>
-   
-@if (Model.IsSubscribedToNewsLetter)
-{
-    <li>Is subscribed to newsletter</li>
-}
-else
-{
-    <li>Is not subscribed to newsletter</li>
-}
-
-
-</ul>
-
-@if (User.IsInRole("CanManageMovies"))
-{
-  
-       <a href="/customer/edit/@Model.Id" class="btn btn-primary">Edit</a>
-}
-
-
-<hr />
+<h2>Display</h2>
 
 <table id="rentals" class="table table-bordered table-hover">
     <thead>
         <tr>
+            <th>Customer</th>
             <th>Movie</th>
             <th>Rented</th>
             <th>Returned</th>
@@ -45,8 +18,7 @@ else
     <tbody></tbody>
 </table>
 
-@section scripts
-    {
+@section scripts{
     <script>
         $(document).ready(function () {
 
@@ -87,12 +59,22 @@ else
         function renderTable(){
             var table = $("#rentals").DataTable({
                 ajax: {
-                    url: "/api/rental/"+@Model.Id,
+                    url: "/api/rental",
                     dataSrc: ""
                 },
                 columns: [
                     {
-                        data: "movieName"
+                        data: { "customerName": "customerName", "customerId" : "customerId"},
+                        render: function (data) {
+                            return "<a href='/customer/Details/" + data.customerId + "'>" + data.customerName + "</a>";
+                        }
+                       
+                    },
+                    {
+                        data: { "movieName" : "movieName", "movieId": "movieId"},
+                        render: function (data) {
+                            return "<a href='/movies/" + data.movieId + "'>" + data.movieName + "</a>";
+                        }
 
                     },
                     {
@@ -116,15 +98,12 @@ else
                                 return date.toDateString();
                             }
                         }
-
+                       
                     }
                 ]
 
             });
             return;
         }
-
     </script>
-
-}
-
+    }

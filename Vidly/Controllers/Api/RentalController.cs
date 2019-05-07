@@ -56,8 +56,15 @@ namespace Vidly.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetRentals()
         {
-            var rentals = _context.Rentals.Include(m=>m.Movie).ToList();
-            return Ok(rentals);
+            var rentals = _context.Rentals.Include(m=>m.Movie).Include(m =>m.Customer);
+
+            var rentalsDto = new List<RentalsDisplayDto>();
+            foreach (var rental in rentals)
+            {
+                rentalsDto.Add(Mapper.Map<Rental, RentalsDisplayDto>(rental));
+            }
+            return Ok(rentalsDto);
+
         }
 
         [HttpGet]

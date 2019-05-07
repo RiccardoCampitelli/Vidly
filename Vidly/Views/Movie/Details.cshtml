@@ -11,4 +11,11 @@
     <li>Release Date: @Model.ReleaseDate.ToShortDateString()</li>
     <li>DateAdded: @Model.DateAdded.ToShortDateString()</li>
     <li>Number available: @Model.NumberAvailable</li>
+    <li>Total number: @Model.NumberInStock</li>
 </ul>
+
+@if (User.IsInRole("CanManageMovies"))
+{
+
+    <a href="/movie/edit/@Model.Id" class="btn btn-primary">Edit</a>
+}

@@ -18,7 +18,6 @@ namespace Vidly.Controllers.Api
         }
 
         [HttpPut]
-        [AllowAnonymous]
         public IHttpActionResult Seed()
         {
 
